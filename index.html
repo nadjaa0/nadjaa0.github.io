@@ -1,1 +1,765 @@
-<h1>Hello</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="https://img.icons8.com/?size=100&id=BcWr8NBOsovH&format=png&color=000000">
+  <title>Welcome to my portfolio</title>
+  <style>
+    /* Global Styles */
+    :root {
+      --primary-color: #5928E5;
+      --secondary-color: #FF3366;
+      --dark-color: #121212;
+      --light-color: #F8F8F8;
+      --card-bg: #ffffff;
+      --text-color: #333333;
+      --border-radius: 10px;
+      --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    
+    body {
+      background-color: var(--light-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+    
+    a {
+      text-decoration: none;
+      color: var(--primary-color);
+    }
+    
+    /* Header Styles */
+    header {
+      background: linear-gradient(135deg, #000000, #555555);
+      color: white;
+      padding: 3rem 0;
+      text-align: center;
+    }
+    
+    .header-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      font-weight: 800;
+    }
+    
+    header p {
+      font-size: 1.25rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    /* Main Content Styles */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 20px;
+    }
+    
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      position: relative;
+      color: var(--dark-color);
+    }
+    
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 4px;
+      background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+      margin: 10px auto 0;
+      border-radius: 2px;
+    }
+    
+    /* Portfolio Grid Styles */
+    .portfolio-section {
+      margin-bottom: 4rem;
+    }
+    
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
+    }
+    
+    .portfolio-item {
+      background-color: var(--card-bg);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      transition: transform 0.3s ease;
+    }
+    
+    .portfolio-item:hover {
+      transform: translateY(-5px);
+    }
+    
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+      height: 0;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      pointer-events: none; /* Prevent clicks on the iframe */
+    }
+    
+    .video-container::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .video-container:hover::after {
+      opacity: 1;
+    }
+    
+    .video-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 8px 15px;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 10;
+    }
+    
+    .video-container:hover .video-overlay {
+      opacity: 1;
+    }
+
+    .profile-link {
+      display: block;
+      text-align: center;
+      padding: 8px 15px;
+      background: #f8f9fa;
+      color: #333;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .profile-link span {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .profile-link span img {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+    }
+
+    .profile-link-button {
+      background-color: #4da7ff;
+      color: white;
+      border-radius: 4px;
+      padding: 6px 15px;
+      font-size: 0.8rem;
+      transition: background-color 0.2s;
+    }
+
+    .profile-link-button:hover {
+      background-color: #3b96f0;
+    }
+    
+    .portfolio-item .content {
+      padding: 1.5rem;
+    }
+    
+    .portfolio-item h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: var(--dark-color);
+    }
+    
+    .portfolio-item p {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 0.75rem;
+    }
+    
+    .views {
+      font-weight: 600;
+      color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .views svg {
+      width: 16px;
+      height: 16px;
+    }
+    
+    .platform-tag {
+      display: inline-block;
+      padding: 0.35rem 0.75rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      color: white;
+    }
+    
+    .tag-tiktok {
+      background-color: #000000;
+    }
+    
+    .tag-youtube {
+      background-color: #FF0000;
+    }
+    
+    .tag-instagram {
+      background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+    }
+    
+    .tag-twitch {
+      background-color: #6441A4;
+    }
+    
+    .tag-documentary {
+      background-color: #14B8A6;
+    }
+    
+    /* Featured Section Styles */
+    .featured-section {
+      margin-bottom: 4rem;
+    }
+    
+    .featured-item {
+      background-color: var(--card-bg);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      margin-bottom: 2rem;
+    }
+    
+    .featured-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+    }
+    
+    .featured-text {
+      padding: 2rem;
+    }
+    
+    .featured-text h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--dark-color);
+    }
+    
+    .featured-text p {
+      margin-bottom: 1.5rem;
+    }
+    
+    /* Footer Styles */
+    footer {
+      background-color: var(--dark-color);
+      color: white;
+      text-align: center;
+      padding: 2rem 0;
+    }
+    
+    .contact-info {
+      margin-bottom: 1.5rem;
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .social-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+    
+    .social-links a:hover {
+      background-color: var(--primary-color);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.5rem;
+      }
+      
+      .featured-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .portfolio-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      }
+    }
+    
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      
+      .section-title {
+        font-size: 1.75rem;
+      }
+    }
+    
+    /* Category Nav */
+    .category-nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 2rem;
+    }
+    
+    .category-btn {
+      padding: 0.5rem 1.25rem;
+      background-color: white;
+      border: 2px solid var(--primary-color);
+      border-radius: 50px;
+      color: var(--primary-color);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .category-btn:hover, .category-btn.active {
+      background-color: var(--primary-color);
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Category filtering functionality
+      const categoryButtons = document.querySelectorAll('.category-btn');
+      const portfolioItems = document.querySelectorAll('.portfolio-item');
+      
+      // Add click event to each category button
+      categoryButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // Remove active class from all buttons
+          categoryButtons.forEach(btn => btn.classList.remove('active'));
+          
+          // Add active class to clicked button
+          this.classList.add('active');
+          
+          // Get the filter value
+          const filterValue = this.getAttribute('data-filter');
+          
+          // Filter portfolio items
+          portfolioItems.forEach(item => {
+            if (filterValue === 'all') {
+              item.style.display = 'block';
+            } else {
+              if (item.getAttribute('data-category') === filterValue) {
+                item.style.display = 'block';
+              } else {
+                item.style.display = 'none';
+              }
+            }
+          });
+        });
+      });
+
+      // Video container click functionality
+      const videoContainers = document.querySelectorAll('.video-container');
+      
+      videoContainers.forEach(container => {
+        const iframe = container.querySelector('iframe');
+        let videoUrl = '';
+        
+        // Extract video URL based on iframe src
+        const iframeSrc = iframe.getAttribute('src');
+        
+        if (iframeSrc.includes('youtube.com')) {
+          // YouTube
+          const videoId = iframeSrc.split('/').pop().split('?')[0];
+          videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
+        } else if (iframeSrc.includes('tiktok.com')) {
+          // TikTok
+          const videoId = iframeSrc.split('/').pop().split('?')[0];
+          videoUrl = `https://www.tiktok.com/@nadjaa0_ttv/video/${videoId}`;
+        } else if (iframeSrc.includes('instagram.com')) {
+          // Instagram - direct link to the post
+          videoUrl = iframeSrc.replace('/embed', '');
+        }
+        
+        // Create overlay
+        const overlay = document.createElement('div');
+        overlay.className = 'video-overlay';
+        overlay.textContent = 'Watch on original platform';
+        container.appendChild(overlay);
+        
+        // Add click event
+        container.addEventListener('click', function() {
+          window.open(videoUrl, '_blank');
+        });
+      });
+    });
+  </script>
+  <!-- Header Section -->
+  <header>
+    <div class="header-content">
+      <h1>Nadja Zekavica</h1>
+      <p style="font-size: 1.1rem; font-weight: 500; letter-spacing: 1px; margin-top: 0.5rem; text-transform: uppercase;">VIDEO PRODUCER/PRESENTER & CONTENT CREATOR</p>
+    </div>
+  </header>
+  
+  <!-- Main Content -->
+  <main>
+    <!-- Featured Work Section -->
+    <section class="featured-section">
+      <h2 class="section-title">Featured Work</h2>
+      <div class="featured-item">
+        <div class="featured-content">
+          <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/-cmUFDKOHKg" allowfullscreen></iframe>
+            <div class="video-overlay">Watch on YouTube</div>
+          </div>
+          <div class="featured-text">
+            <span class="platform-tag tag-youtube">YouTube Shorts</span>
+            <h3>Viral Gaming Content</h3>
+            <p>This short-form content showcases exciting gameplay moments that captured the attention of thousands of viewers.</p>
+            <div class="views">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+              1M Views
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="featured-item">
+        <div class="featured-content">
+          <div class="featured-text">
+            <span class="platform-tag tag-tiktok">TikTok</span>
+            <h3>Most Viewed Gaming Content</h3>
+            <p>One of my highest performing TikTok videos with over 2 million views, featuring engaging gaming highlights and commentary.</p>
+            <div class="views">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+              2M Views
+            </div>
+          </div>
+          <div class="video-container">
+            <iframe src="https://www.tiktok.com/embed/v2/7406368954903579936" allowfullscreen scrolling="no" allow="encrypted-media;"></iframe>
+            <div class="video-overlay">Watch on TikTok</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Portfolio Grid Section -->
+    <section class="portfolio-section">
+      <h2 class="section-title">My Work</h2>
+      
+      <!-- Category Navigation -->
+      <div class="category-nav">
+        <button class="category-btn active" data-filter="all">All</button>
+        <button class="category-btn" data-filter="short-form">Short Form</button>
+        <button class="category-btn" data-filter="long-form">Long Form</button>
+        <button class="category-btn" data-filter="documentary">Documentary</button>
+      </div>
+      
+      <div class="portfolio-grid">
+        <!-- YouTube Shorts -->
+        <div class="portfolio-item" data-category="short-form">
+          <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/fiM9nvbFbNQ" allowfullscreen></iframe>
+          </div>
+          <div class="content">
+            <span class="platform-tag tag-youtube">YouTube Shorts</span>
+            <h3>Gaming Highlight</h3>
+            <p>Quick gameplay moment that captured viewers' attention</p>
+            <div class="views">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+              76K Views
+            </div>
+          </div>
+        </div>
+        
+        <div class="portfolio-item" data-category="short-form">
+          <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/-cmUFDKOHKg" allowfullscreen></iframe>
+          </div>
+          <div class="content">
+            <span class="platform-tag tag-youtube">YouTube Shorts</span>
+            <h3>Gaming Highlight</h3>
+            <p>Viral gameplay moment with near 1M views</p>
+            <div class="views">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+              1M Views
+            </div>
+          </div>
+        </div>
+        
+        <!-- TikToks -->
+        <div class="portfolio-item" data-category="short-form">
+          <div class="video-container">
+            <iframe src="https://www.tiktok.com/embed/v2/7406368954903579936" allowfullscreen scrolling="no" allow="encrypted-media;"></iframe>
+          </div>
+          <div class="content">
+            <span class="platform-tag tag-tiktok">TikTok</span>
+            <h3>Dexerto Gaming Clip</h3>
+            <p>One of my most popular TikToks</p>
+            <div class="views">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+              2M Views
+            </div>
+          </div>
+        </div>
+        
+        <div class="portfolio-item" data-category="short-form">
+          <div class="video-container">
+            <iframe src="https://www.tiktok.com/embed/v2/7428644078767656224" allowfullscreen scrolling="no" allow="encrypted-media;"></iframe>
+          </div>
+          <div class="content">
+            <span class="platform-tag tag-tiktok">TikTok</span>
+            <h3>Dexerto Gaming Content</h3>
+            <p>Engaging content that captured nearly 1M views</p>
+            <div class="views">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+              950K Views
+            </div>
+          </div>
+        </div>
+        
+        <div class="portfolio-item" data-category="short-form">
+          <div class="video-container">
+            <iframe src="https://www.tiktok.com/embed/v2/7400063350836710688" allowfullscreen scrolling="no" allow="encrypted-media;"></iframe>
+          </div>
+          <div class="content">
+            <span class="platform-tag tag-tiktok">TikTok</span>
+            <h3>Gaming Highlight Reel</h3>
+            <p>Exciting gameplay moments curated for TikTok</p>
+            <div class="views">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+              415K Views
+            </div>
+          </div>
+        </div>
+        
+        <!-- Instagram Reels -->
+        <div class="portfolio-item" data-category="short-form">
+          <div class="video-container">
+            <iframe src="https://www.instagram.com/p/C9ufo1FtgDG/embed" allowfullscreen scrolling="no"></iframe>
+          </div>
+          <div class="content">
+            <span class="platform-tag tag-instagram">Instagram Reel</span>
+            <h3>Fortuna Esports Content</h3>
+            <p>Short-form gaming content created for Instagram</p>
+          </div>
+        </div>
+        
+        <div class="portfolio-item" data-category="short-form">
+          <div class="video-container">
+            <iframe src="https://www.instagram.com/p/C-8DAR5oARc/embed" allowfullscreen scrolling="no"></iframe>
+          </div>
+          <div class="content">
+            <span class="platform-tag tag-instagram">Instagram Reel</span>
+            <h3>Fortuna Esports Highlight</h3>
+            <p>Gaming moment captured for Instagram audience</p>
+          </div>
+        </div>
+        
+        <!-- Marvel Feature -->
+        <div class="portfolio-item" data-category="short-form">
+          <div class="video-container">
+            <iframe src="https://www.instagram.com/p/DDh0MtnIefV/embed" allowfullscreen scrolling="no"></iframe>
+          </div>
+          <div class="content">
+            <span class="platform-tag tag-instagram">Dexerto Feature</span>
+            <h3>Marvel Video Presentation</h3>
+            <p>Featured content that went viral across platforms</p>
+            <div class="views">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+              5M+ Views
+            </div>
+          </div>
+        </div>
+        
+        <!-- On-site filming -->
+        <div class="portfolio-item" data-category="short-form">
+          <div class="video-container">
+            <iframe src="https://www.instagram.com/reel/C7el-wTN4h9/embed" allowfullscreen scrolling="no"></iframe>
+          </div>
+          <div class="content">
+            <span class="platform-tag tag-instagram">Instagram Reel</span>
+            <h3>On-site Event Coverage</h3>
+            <p>Behind-the-scenes footage from gaming events</p>
+          </div>
+        </div>
+        
+        <!-- Self-learned editing -->
+        <div class="portfolio-item" data-category="short-form">
+          <div class="video-container">
+            <iframe src="https://www.tiktok.com/embed/v2/7316962426543459590" allowfullscreen scrolling="no" allow="encrypted-media;"></iframe>
+          </div>
+          <div class="content">
+            <span class="platform-tag tag-tiktok">TikTok</span>
+            <h3>Self-Edited Gaming Content</h3>
+            <p>Showcasing my self-learned editing skills</p>
+          </div>
+        </div>
+        
+        <!-- Long-form content -->
+        <div class="portfolio-item" data-category="long-form">
+          <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/Bqr-xo25SmU" allowfullscreen></iframe>
+          </div>
+          <div class="content">
+            <span class="platform-tag tag-youtube">YouTube</span>
+            <h3>Long-Form Gaming Content</h3>
+            <p>In-depth gaming analysis and commentary</p>
+          </div>
+        </div>
+        
+        <div class="portfolio-item" data-category="long-form">
+          <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/ea_aFfrIuQo" allowfullscreen></iframe>
+          </div>
+          <div class="content">
+            <span class="platform-tag tag-youtube">YouTube</span>
+            <h3>Long-Form Gaming Content</h3>
+            <p>Comprehensive gameplay and strategy guide</p>
+          </div>
+        </div>
+        
+        <div class="portfolio-item" data-category="long-form">
+          <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/DK6oFqMfoiA" allowfullscreen></iframe>
+          </div>
+          <div class="content">
+            <span class="platform-tag tag-youtube">YouTube</span>
+            <h3>Gaming League Overview</h3>
+            <p>Detailed coverage and analysis of competitive gaming events</p>
+          </div>
+        </div>
+        
+        <!-- Documentary -->
+        <div class="portfolio-item" data-category="documentary">
+          <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/2_Z0i3mVHI4" allowfullscreen></iframe>
+          </div>
+          <div class="content">
+            <span class="platform-tag tag-documentary">Documentary</span>
+            <h3>Gaming Documentary Collaboration</h3>
+            <p>In-depth look at the esports industry and culture</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <!-- Footer Section -->
+  <footer>
+    <div class="contact-info">
+      <p>Let's Connect!</p>
+      <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8;"><a href="https://linktr.ee/nadjazekavica" target="_blank">All Links: linktr.ee/nadjazekavica</a></p>
+    </div>
+    <div class="social-links" style="margin-top: 1rem;">
+      <a href="https://www.youtube.com/@nadjaz.tv" aria-label="YouTube">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"/>
+        </svg>
+      </a>
+      <a href="https://www.tiktok.com/@nadjaa0_ttv" aria-label="TikTok">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3V0Z"/>
+        </svg>
+      </a>
+      <a href="https://www.instagram.com/nadjazekavica/" aria-label="Instagram">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 512"><path fill="#fff" fill-rule="nonzero" d="M170.663 256.157c-.083-47.121 38.055-85.4 85.167-85.483 47.121-.092 85.407 38.03 85.499 85.16.091 47.129-38.047 85.4-85.176 85.492-47.112.09-85.399-38.039-85.49-85.169zm-46.108.091c.141 72.602 59.106 131.327 131.69 131.186 72.592-.141 131.35-59.09 131.209-131.692-.141-72.577-59.114-131.335-131.715-131.194-72.585.141-131.325 59.115-131.184 131.7zm237.104-137.091c.033 16.953 13.817 30.681 30.772 30.648 16.961-.033 30.689-13.811 30.664-30.764-.033-16.954-13.818-30.69-30.78-30.657-16.962.033-30.689 13.818-30.656 30.773zm-208.696 345.4c-24.958-1.087-38.511-5.234-47.543-8.709-11.961-4.629-20.496-10.178-29.479-19.094-8.966-8.95-14.532-17.46-19.202-29.397-3.508-9.032-7.73-22.569-8.9-47.527-1.269-26.982-1.559-35.077-1.683-103.432-.133-68.339.116-76.434 1.294-103.441 1.069-24.942 5.242-38.512 8.709-47.536 4.628-11.977 10.161-20.496 19.094-29.479 8.949-8.982 17.459-14.532 29.403-19.202 9.025-3.525 22.561-7.714 47.511-8.9 26.998-1.277 35.085-1.551 103.423-1.684 68.353-.132 76.448.108 103.456 1.295 24.94 1.086 38.51 5.217 47.527 8.709 11.968 4.628 20.503 10.144 29.478 19.094 8.974 8.95 14.54 17.443 19.21 29.412 3.524 9 7.714 22.553 8.892 47.494 1.285 26.999 1.576 35.095 1.7 103.433.132 68.355-.117 76.451-1.302 103.441-1.087 24.958-5.226 38.52-8.709 47.561-4.629 11.952-10.161 20.487-19.103 29.471-8.941 8.949-17.451 14.531-29.403 19.201-9.009 3.517-22.561 7.714-47.494 8.9-26.998 1.269-35.086 1.559-103.448 1.684-68.338.132-76.424-.125-103.431-1.294zM149.977 1.773c-27.239 1.285-45.843 5.648-62.101 12.018-16.829 6.561-31.095 15.354-45.286 29.604C28.381 57.653 19.655 71.944 13.144 88.79c-6.303 16.299-10.575 34.912-11.778 62.168C.172 178.264-.102 186.973.031 256.489c.133 69.508.439 78.234 1.741 105.547 1.302 27.231 5.649 45.828 12.019 62.093 6.569 16.83 15.353 31.088 29.611 45.288 14.25 14.201 28.55 22.918 45.404 29.438 16.282 6.295 34.902 10.583 62.15 11.778 27.305 1.203 36.022 1.468 105.521 1.335 69.532-.132 78.25-.439 105.555-1.733 27.239-1.303 45.826-5.665 62.1-12.019 16.829-6.586 31.095-15.353 45.288-29.611 14.191-14.251 22.917-28.55 29.428-45.405 6.304-16.282 10.592-34.903 11.777-62.134 1.195-27.322 1.478-36.048 1.344-105.556-.133-69.516-.447-78.225-1.741-105.523-1.294-27.255-5.657-45.844-12.019-62.118-6.577-16.829-15.352-31.079-29.602-45.287-14.25-14.192-28.55-22.935-45.404-29.429-16.29-6.305-34.903-10.601-62.15-11.779C333.747.164 325.03-.102 255.506.031c-69.507.133-78.224.431-105.529 1.742z"/></svg>
+      </a>
+      <a href="https://twitter.com/NadjaZ10" aria-label="Twitter/X">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633Z"/>
+        </svg>
+      </a>
+      <a href="https://www.twitch.tv/nadjaa0" aria-label="Twitch">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M3.857 0 1 2.857v10.286h3.429V16l2.857-2.857H9.57L14.714 8V0H3.857zm9.714 7.429-2.285 2.285H9l-2 2v-2H4.429V1.143h9.142v6.286z"/>
+          <path d="M11.857 3.143h-1.143V6.57h1.143V3.143zm-3.143 0H7.571V6.57h1.143V3.143z"/>
+        </svg>
+      </a>
+      <a href="https://www.linkedin.com/in/nadja-zekavica-17bb94232/" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+        </svg>
+      </a>
+    </div>
